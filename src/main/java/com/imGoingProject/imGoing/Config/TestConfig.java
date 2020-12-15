@@ -16,6 +16,7 @@ import com.imGoingProject.imGoing.Repositories.UserRepository;
 import com.imGoingProject.imGoing.entities.Category;
 import com.imGoingProject.imGoing.entities.Order;
 import com.imGoingProject.imGoing.entities.OrderItem;
+import com.imGoingProject.imGoing.entities.Payment;
 import com.imGoingProject.imGoing.entities.Product;
 import com.imGoingProject.imGoing.entities.User;
 import com.imGoingProject.imGoing.entities.enums.OrderStatus;
@@ -83,7 +84,10 @@ public class TestConfig implements CommandLineRunner {
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 		
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-23T13:02:55Z"), o1);
+		o1.setPayment(pay1);
 		
+		orderRepository.saveAll(Arrays.asList(o1));
 		
 	}
 }
