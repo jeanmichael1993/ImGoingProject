@@ -100,6 +100,14 @@ private static final long serialVersionUID = 1L;
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
+	
+	public Double getTotal() {
+		double sum = 0.0;
+		for (OrderItem x :items) {
+			sum += x.getsubTotal();
+		}
+		return sum;
+	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
 		if(orderStatus != null) {
