@@ -17,7 +17,7 @@ public class UserResource {
 	//findall para pegar todos
 	public ResponseEntity<User> findAll(){
 		//criando um objeto com dados
-		User u = new User(1L,"Maria","Maria@gmail.com","1234","123");
+		User u = new User(null,"Maria","Maria@gmail.com","1234","123");
 		//retornar o objeto
 		return ResponseEntity.ok().body(u);
 	}
