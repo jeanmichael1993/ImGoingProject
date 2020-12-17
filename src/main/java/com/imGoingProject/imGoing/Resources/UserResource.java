@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.imGoingProject.imGoing.DTO.UserDTO;
 import com.imGoingProject.imGoing.entities.User;
 import com.imGoingProject.imGoing.services.UserService;
 
@@ -29,17 +30,17 @@ public class UserResource {
 	//metodo para pegar um dado
 	@GetMapping
 	//findall para pegar todos
-	public ResponseEntity<List<User>> findAll(){
+	public ResponseEntity<List<UserDTO>> findAll(){
 		//criando um objeto com dados
-	List<User> list = service.findAll();
+	List<UserDTO> list = service.findAll();
 		//retornar o objeto
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id){
-		User obj = service.findbyId(id);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<UserDTO> findById(@PathVariable Long id){
+		UserDTO dto = service.findbyId(id);
+		return ResponseEntity.ok().body(dto);
 	}
 	
 	@PostMapping
