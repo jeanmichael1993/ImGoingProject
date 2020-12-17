@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.imGoingProject.imGoing.DTO.UserDTO;
+import com.imGoingProject.imGoing.DTO.UserInsertDTO;
 import com.imGoingProject.imGoing.Repositories.UserRepository;
 import com.imGoingProject.imGoing.entities.User;
 import com.imGoingProject.imGoing.services.exceptions.DatabaseException;
@@ -35,8 +36,10 @@ public class UserService {
 		return new UserDTO(entity);
 	}
 	
-	public User insert(User obj) {
-		return repository.save(obj);
+	public UserDTO insert(UserInsertDTO dto) {
+		User entity = dto.toEntity();
+		entity = repository.save(entity);
+		return new UserDTO(entity);
 	}
 	
 	public void deleted(Long id) {

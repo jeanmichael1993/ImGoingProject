@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.imGoingProject.imGoing.DTO.UserDTO;
-import com.imGoingProject.imGoing.entities.User;
+import com.imGoingProject.imGoing.DTO.UserInsertDTO;
 import com.imGoingProject.imGoing.services.UserService;
 
 @RestController
@@ -44,11 +44,11 @@ public class UserResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> insert(@RequestBody User obj){
-		obj = service.insert(obj);
+	public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO dto){
+		UserDTO newDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(obj);
+				.buildAndExpand(dto.getId()).toUri();
+		return ResponseEntity.created(uri).body(newDto);
 		}
 	
 	@DeleteMapping(value = "/{id}")
