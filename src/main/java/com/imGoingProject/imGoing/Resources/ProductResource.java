@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.imGoingProject.imGoing.DTO.ProductDTO;
 import com.imGoingProject.imGoing.entities.Product;
 import com.imGoingProject.imGoing.services.ProductService;
 
@@ -20,20 +21,17 @@ public class ProductResource {
 	@Autowired
 	private ProductService service;
 	
-	//metodo para pegar um dado
 	@GetMapping
-	//findall para pegar todos
-	public ResponseEntity<List<Product>> findAll(){
-		//criando um objeto com dados
-	List<Product> list = service.findAll();
-		//retornar o objeto
+	public ResponseEntity<List<ProductDTO>> findAll() {	
+		List<ProductDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Product> findById(@PathVariable Long id){
-		Product obj = service.findbyId(id);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
+		ProductDTO dto = service.findById(id);
+		return ResponseEntity.ok().body(dto);
+		
 	}
 	
 

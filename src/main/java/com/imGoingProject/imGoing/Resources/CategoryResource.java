@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.imGoingProject.imGoing.entities.Category;
+import com.imGoingProject.imGoing.DTO.CategoryDTO;
 import com.imGoingProject.imGoing.entities.Category;
 import com.imGoingProject.imGoing.services.CategoryService;
 
@@ -27,39 +27,37 @@ public class CategoryResource {
 	@Autowired
 	private CategoryService service;
 	
-	//metodo para pegar um dado
+
 	@GetMapping
-	//findall para pegar todos
-	public ResponseEntity<List<Category>> findAll(){
-		//criando um objeto com dados
-	List<Category> list = service.findAll();
-		//retornar o objeto
+	public ResponseEntity<List<CategoryDTO>> findAll() {	
+	List<CategoryDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Category> findById(@PathVariable Long id){
-		Category obj = service.findbyId(id);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
+		CategoryDTO dto = service.findById(id);
+		return ResponseEntity.ok().body(dto);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Category> insert(@RequestBody Category obj){
-		obj = service.insert(obj);
+	public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) {
+		CategoryDTO newDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(obj);
-		}
-	
+					.buildAndExpand(newDto.getId()).toUri();
+		return ResponseEntity.created(uri).body(newDto);
+	}
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
-		service.deleted(id);
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody Category obj){
-		obj = service.update(id, obj);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto) {
+		dto = service.update(id, dto);
+		return ResponseEntity.ok().body(dto);
 	}
 
 }
