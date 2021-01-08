@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.imGoingProject.imGoing.DTO.OrderDTO;
 import com.imGoingProject.imGoing.entities.Order;
 import com.imGoingProject.imGoing.services.OrderService;
 
@@ -19,20 +20,16 @@ public class OrderResource {
 	
 	@Autowired
 	private OrderService service;
-	
-	//metodo para pegar um dado
+
 	@GetMapping
-	//findall para pegar todos
-	public ResponseEntity<List<Order>> findAll(){
-		//criando um objeto com dados
-	List<Order> list = service.findAll();
-		//retornar o objeto
+	public ResponseEntity<List<OrderDTO>> findAll(){
+	List<OrderDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Order> findById(@PathVariable Long id){
-		Order obj = service.findbyId(id);
+	public ResponseEntity<OrderDTO> findById(@PathVariable Long id){
+		OrderDTO obj = service.findbyId(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
