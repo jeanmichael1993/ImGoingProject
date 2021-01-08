@@ -26,14 +26,10 @@ public class UserResource {
 	
 	@Autowired
 	private UserService service;
-	
-	//metodo para pegar um dado
+
 	@GetMapping
-	//findall para pegar todos
 	public ResponseEntity<List<UserDTO>> findAll(){
-		//criando um objeto com dados
 	List<UserDTO> list = service.findAll();
-		//retornar o objeto
 		return ResponseEntity.ok().body(list);
 	}
 	
