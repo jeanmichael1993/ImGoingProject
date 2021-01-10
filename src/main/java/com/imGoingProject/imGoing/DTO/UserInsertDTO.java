@@ -8,7 +8,10 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.imGoingProject.imGoing.entities.User;
+import com.imGoingProject.imGoing.services.validation.UserInsertValid;
 
+
+@UserInsertValid
 public class UserInsertDTO implements Serializable {
 
 	
