@@ -2,15 +2,28 @@ package com.imGoingProject.imGoing.DTO;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.imGoingProject.imGoing.entities.User;
 
+
+@UserUpdateValid
 public class UserDTO implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
 	private Long id;
+	@NotEmpty(message = "can't be empty")
+	@Length(min = 5, max = 80, message = "Length must be between 5 and 80")
 	private String name;
+	@NotEmpty(message = "can't be empty")
+	@Email
 	private String email;
+	@NotEmpty(message = "can't be empty")
+	@Length(min = 8, max = 20, message = "Length must be between 8 and 20")
 	private String phone;
 
 	
