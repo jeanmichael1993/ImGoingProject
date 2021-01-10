@@ -2,25 +2,24 @@ package com.imGoingProject.imGoing.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.imGoingProject.imGoing.DTO.CategoryDTO;
 import com.imGoingProject.imGoing.DTO.ProductCategoriesDTO;
 import com.imGoingProject.imGoing.DTO.ProductDTO;
-import com.imGoingProject.imGoing.DTO.UserDTO;
 import com.imGoingProject.imGoing.Repositories.CategoryRepository;
 import com.imGoingProject.imGoing.Repositories.ProductRepository;
 import com.imGoingProject.imGoing.entities.Category;
 import com.imGoingProject.imGoing.entities.Product;
-import com.imGoingProject.imGoing.entities.User;
 import com.imGoingProject.imGoing.services.exceptions.DatabaseException;
 import com.imGoingProject.imGoing.services.exceptions.ResourceNotFoundException;
 
@@ -33,9 +32,9 @@ public class ProductService {
 	@Autowired
 	private ProductRepository repository;
 	
-	public List<ProductDTO> findAll() {
-		List<Product> list =  repository.findAll();
-		return list.stream().map(e -> new ProductDTO(e)).collect(Collectors.toList());
+	public Page<ProductDTO> findAllPaged(Pageable pageable) {
+		Page<Product> list =  repository.findAll(pageable);
+		return list.map(e -> new ProductDTO(e));
 	}
 	
 	public ProductDTO findById(Long id) {

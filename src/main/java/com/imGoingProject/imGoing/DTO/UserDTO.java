@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.imGoingProject.imGoing.entities.User;
+import com.imGoingProject.imGoing.services.validation.UserUpdateValid;
 
 
 @UserUpdateValid
